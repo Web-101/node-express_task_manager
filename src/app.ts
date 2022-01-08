@@ -8,11 +8,12 @@ import tasks from "./routes/tasks";
 const app: express.Application = express();
 const port: any = process.env.PORT || 3000;
 
-// routes
-app.use("/api/v1/", tasks);
-
 // load middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// routes
+app.use("/api/v1/", tasks);
 
 app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Hello World!");

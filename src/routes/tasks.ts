@@ -9,12 +9,12 @@ const router = express.Router();
 
 // routes
 router
-  .route("/")
+  .route("/tasks")
   .get(tasks.getAllTasks)
   .post(tasks.createTask);
 
 router
-  .route("/:id")
+  .route("/tasks/:id")
   .get(tasks.getTask)
   .put(tasks.updateTask)
   .delete(tasks.deleteTask);
