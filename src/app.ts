@@ -22,7 +22,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 });
 
 // start db
-db.init(process.env.DB_URL as string);
+db.init(process.env.DB_URI as string);
 
 // start server
 app.listen(port, () => console.log("Listening on port", port));
