@@ -2,7 +2,7 @@
 import express from "express";
 
 // import files
-import taskModel from "../models/tasks";
+import taskModel from "../models/tasksModel";
 
 // no query params
 export function getAllTasks(req: express.Request, res: express.Response) {

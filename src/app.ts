@@ -4,7 +4,7 @@ import express from "express";
 
 // import files
 import * as db from "./db/connect";
-import tasks from "./routes/tasks";
+import tasks from "./routes/tasksRoute";
 
 // constants
 const app: express.Application = express();

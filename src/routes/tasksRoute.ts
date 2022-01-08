@@ -2,7 +2,7 @@
 import express from "express";
 
 // import controllers
-import * as tasks from "../controllers/tasks";
+import * as tasks from "../controllers/tasksController";
 
 // constants
 const router = express.Router();
