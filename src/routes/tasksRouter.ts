@@ -1,7 +1,5 @@
-// import libs
+// imports
 import express from "express";
-
-// import controllers
 import * as tasks from "../controllers/tasksController";
 
 // constants

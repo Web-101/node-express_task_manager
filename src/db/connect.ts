@@ -1,5 +1,7 @@
+// imports
 import mongoose from "mongoose";
 
+// connect to mongoDB
 export function init(uri: string) {
   mongoose
     .connect(uri)

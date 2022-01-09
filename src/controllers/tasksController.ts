@@ -1,15 +1,13 @@
-// import libs
+// imports
 import express from "express";
-
-// import files
 import taskModel from "../models/tasksModel";
 
 // no query params
-export function getAllTasks(req: express.Request, res: express.Response) {
+export function getAllTasks(_: express.Request, res: express.Response) {
   taskModel
     .find()
-    .then((tasks: any) => res.json(tasks))
-    .catch((err: any) => res.status(400).json(err));
+    .then((tasks) => res.status(200).json(tasks))
+    .catch((err) => res.status(400).json(err));
 }
 
 export function createTask(req: express.Request, res: express.Response) {
@@ -21,30 +19,22 @@ export function createTask(req: express.Request, res: express.Response) {
 
 // query by id
 export function getTask(req: express.Request, res: express.Response) {
-  const id: string = req.params.id;
-
   taskModel
-    .findById(id)
-    .then((task) => res.json(task))
+    .findById(req.params.id)
+    .then((task) => res.status(200).json(task))
     .catch((err) => res.status(400).json("Error: " + err));
 }
 
 export function updateTask(req: express.Request, res: express.Response) {
-  const id: string = req.params.id;
-
-  console.log(req.body);
-
   taskModel
-    .findByIdAndUpdate(id, req.body, { new: true })
-    .then((task) => res.json(task))
+    .findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((task) => res.status(200).json(task))
     .catch((err) => res.status(400).json("Error: " + err));
 }
 
 export function deleteTask(req: express.Request, res: express.Response) {
-  const id: string = req.params.id;
-
   taskModel
-    .findByIdAndDelete(id)
-    .then((task) => res.status(200).json({ success: true }))
+    .findByIdAndDelete(req.params.id)
+    .then(() => res.status(200).json({ success: true }))
     .catch((err) => res.status(400).json("Error: " + err));
 }

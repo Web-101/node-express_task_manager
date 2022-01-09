@@ -1,5 +1,7 @@
+// imports
 import mongoose from "mongoose";
 
+// schemas
 const TaskSchema = new mongoose.Schema({
   name: {
     type: String,

@@ -1,10 +1,8 @@
-// import libs
+// imports
 import "dotenv/config";
 import express from "express";
-
-// import files
 import * as db from "./db/connect";
-import tasks from "./routes/tasksRoute";
+import tasks from "./routes/tasksRouter";
 
 // constants
 const app: express.Application = express();
@@ -17,13 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 app.use("/api/v1/", tasks);
 
-app.get("/", (req: express.Request, res: express.Response) => {
-  res.send("Hello World!");
-});
-
-// start db
-db.init(process.env.DB_URI as string);
-
 // start server
 app.listen(port, () => console.log("Listening on port", port));
 
+// start db
+db.init(process.env.DB_URI as string);
