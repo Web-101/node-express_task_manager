@@ -38,5 +38,8 @@ export function updateTask(req: express.Request, res: express.Response) {
 export function deleteTask(req: express.Request, res: express.Response) {
   const id: string = req.params.id;
 
-  res.send(`delete task here! ${id}`);
+  taskModel
+    .findByIdAndDelete(id)
+    .then((task) => res.status(200).json({ success: true }))
+    .catch((err) => res.status(400).json("Error: " + err));
 }
