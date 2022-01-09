@@ -26,8 +26,10 @@ export function getTask(req: express.Request, res: express.Response) {
 }
 
 export function updateTask(req: express.Request, res: express.Response) {
+  const opt = { new: true, runValidators: true };
+
   taskModel
-    .findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .findByIdAndUpdate(req.params.id, req.body, opt)
     .then((task) => res.status(200).json(task))
     .catch((err) => res.status(400).json("Error: " + err));
 }
