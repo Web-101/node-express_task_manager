@@ -6,7 +6,10 @@ import taskModel from "../models/tasksModel";
 
 // no query params
 export function getAllTasks(req: express.Request, res: express.Response) {
-  res.send("all tasks here!");
+  taskModel
+    .find()
+    .then((tasks: any) => res.json(tasks))
+    .catch((err: any) => res.status(400).json("Error: " + err));
 }
 
 export function createTask(req: express.Request, res: express.Response) {
