@@ -23,7 +23,10 @@ export function createTask(req: express.Request, res: express.Response) {
 export function getTask(req: express.Request, res: express.Response) {
   const id: string = req.params.id;
 
-  res.send(`tasks by id here! ${id}`);
+  taskModel
+    .findById(id)
+    .then((task) => res.json(task))
+    .catch((err) => res.status(400).json("Error: " + err));
 }
 
 export function updateTask(req: express.Request, res: express.Response) {
