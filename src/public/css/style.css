@@ -1,0 +1,35 @@
+main {
+  width: 70vw;
+}
+
+.card-body {
+  height: 55vh;
+}
+
+.fix-position-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.addnew-button {
+  margin-right: -16px !important;
+}
+
+.addnew-button i {
+  font-size: 0.75rem;
+}
+
+.addnew-button,
+.addnew-button:focus,
+.addnew-button:hover,
+.addnew-button:active {
+  box-shadow: none;
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    width: 768px;
+  }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>To-Do List - Edit</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <main id="app" class="fix-position-center">
+    <div class="card">
+
+      <!-- header  -->
+      <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <i class="fa fa-tasks"></i>
+            <strong class="card-header-title ml-2"> Edit Task </strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- body -->
+      <div class="card-body">
+        <form action="/" method="post">
+          <div class="form-group">
+            <label for="task-name">Task Name</label>
+            <input 
+              name="name" 
+              type="text" 
+              class="form-control" 
+              id="task-name" 
+              placeholder="Enter Task Name"
+              v-model="task.name"
+              maxlength="20"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="task-description">Task Description</label>
+            <textarea 
+              name="description" 
+              class="form-control" 
+              id="task-description" 
+              rows="3"
+              v-model="task.description"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="task-status">Task Status</label>
+            <select 
+              name="completed" 
+              class="form-control" 
+              id="task-status" 
+              v-model="task.completed"
+            >
+              <option value="false">Pending</option>
+              <option value="true">Completed</option>
+            </select>
+          </div>
+          <button 
+            type="submit" 
+            class="btn btn-primary mx-0 float-right" 
+            @click.prevent="updateTask"
+          >Submit</button>
+          <button 
+            type="submit" 
+            class="btn btn-danger mr-2 float-right" 
+            @click.prevent="updateTask"
+          >Cancel</button>
+        </form>
+      </div>
+  </main>
+
+  <script>
+    new Vue({
+      el: '#app',
+
+      data: {
+        id: '',
+        task: {
+          name: '',
+          description: '',
+          completed: false
+        }
+      },
+
+      methods: {
+        updateTask() {
+          axios
+            .put(`./api/v1/tasks/${this.id}`, this.task)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+
+          window.location.href = './index.html';
+        }
+      },
+
+      mounted() {
+        this.id = window.location.search.split('?')[1];
+
+        axios
+          .get(`./api/v1/tasks/${this.id}`)
+          .then(res => { this.task = res.data })
+          .catch(err => console.log(err));
+      }
+    })
+  </script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+
+</html>
